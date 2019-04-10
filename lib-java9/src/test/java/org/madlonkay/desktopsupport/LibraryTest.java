@@ -4,11 +4,10 @@
 package org.madlonkay.desktopsupport;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.madlonkay.desktopsupport.impl.Java9DesktopSupportImpl;
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        new Java9DesktopSupportImpl();
     }
 }

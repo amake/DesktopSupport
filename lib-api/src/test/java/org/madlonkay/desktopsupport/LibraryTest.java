@@ -3,12 +3,19 @@
  */
 package org.madlonkay.desktopsupport;
 
+import java.awt.event.ActionListener;
+
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        new IDesktopSupport() {
+
+            @Override
+            public void setAboutHandler(ActionListener handler) {
+                // TODO Auto-generated method stub
+
+            }
+        };
     }
 }
