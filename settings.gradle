@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'DesktopSupport'
-include ':lib', ':example'
+include ':lib', ':lib-api', ':lib-apple', ':lib-java9', ':example'
