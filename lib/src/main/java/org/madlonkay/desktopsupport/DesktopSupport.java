@@ -3,32 +3,38 @@
  */
 package org.madlonkay.desktopsupport;
 
-import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.madlonkay.desktopsupport.impl.AppleDesktopSupportImpl;
 import org.madlonkay.desktopsupport.impl.DummyDesktopSupportImpl;
 import org.madlonkay.desktopsupport.impl.Java9DesktopSupportImpl;
 
-public class DesktopSupport {
+public final class DesktopSupport {
 
-    private final IDesktopSupport impl;
+    private static IDesktopSupport impl;
 
-    public DesktopSupport() {
-        IDesktopSupport newImpl = null;
-        try {
-            newImpl = new Java9DesktopSupportImpl();
-        } catch (Throwable ex) {
-            System.out.println("Could not instantiate Java 9 support");
+    public static IDesktopSupport getSupport() {
+        if (impl == null) {
+            impl = getSupportImpl();
         }
-        try {
-            newImpl = new AppleDesktopSupportImpl();
-        } catch (Throwable ex) {
-            System.out.println("Could not instantiate Apple support");
-        }
-        impl = newImpl != null ? newImpl : new DummyDesktopSupportImpl();
+        return impl;
     }
 
-    public void addAboutHandler(ActionListener handler) {
-        impl.setAboutHandler(handler);
+    private static IDesktopSupport getSupportImpl() {
+        try {
+            return new Java9DesktopSupportImpl();
+        } catch (Throwable ex) {
+            Logger.getLogger(DesktopSupport.class.getName()).log(Level.FINEST, "Could not instantiate Java 9 support");
+        }
+        try {
+            return new AppleDesktopSupportImpl();
+        } catch (Throwable ex) {
+            Logger.getLogger(DesktopSupport.class.getName()).log(Level.FINEST, "Could not instantiate Apple support");
+        }
+        return new DummyDesktopSupportImpl();
+    }
+
+    private DesktopSupport() {
     }
 }

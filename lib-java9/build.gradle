@@ -30,7 +30,7 @@ eclipse {
 }
 
 dependencies {
-    implementation project(':lib-api')
+    api project(':lib-api')
 
     testImplementation 'junit:junit:4.12'
 }

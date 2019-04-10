@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
-        DesktopSupport classUnderTest = new DesktopSupport();
-        classUnderTest.addAboutHandler(e -> {
+        IDesktopSupport classUnderTest = DesktopSupport.getSupport();
+        classUnderTest.setAboutHandler(e -> {
         });
     }
 }
