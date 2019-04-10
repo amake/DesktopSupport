@@ -12,11 +12,14 @@ import org.madlonkay.desktopsupport.impl.Java9DesktopSupportImpl;
 
 public final class DesktopSupport {
 
+    private static final Logger LOGGER = Logger.getLogger(DesktopSupport.class.getName());
+
     private static IDesktopSupport impl;
 
     public static IDesktopSupport getSupport() {
         if (impl == null) {
             impl = getSupportImpl();
+            LOGGER.log(Level.FINEST, "Using DesktopSupport implementation: " + impl.getClass().getName());
         }
         return impl;
     }
@@ -25,12 +28,12 @@ public final class DesktopSupport {
         try {
             return new Java9DesktopSupportImpl();
         } catch (Throwable ex) {
-            Logger.getLogger(DesktopSupport.class.getName()).log(Level.FINEST, "Could not instantiate Java 9 support");
+            LOGGER.log(Level.FINEST, "Could not instantiate Java 9 support");
         }
         try {
             return new AppleDesktopSupportImpl();
         } catch (Throwable ex) {
-            Logger.getLogger(DesktopSupport.class.getName()).log(Level.FINEST, "Could not instantiate Apple support");
+            LOGGER.log(Level.FINEST, "Could not instantiate Apple support");
         }
         return new DummyDesktopSupportImpl();
     }
