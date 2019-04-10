@@ -1,23 +1,126 @@
 package org.madlonkay.desktopsupport.impl;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import org.madlonkay.desktopsupport.AppForegroundListener;
+import org.madlonkay.desktopsupport.AppHiddenListener;
+import org.madlonkay.desktopsupport.AppReopenedListener;
 import org.madlonkay.desktopsupport.FilesEvent;
 import org.madlonkay.desktopsupport.IDesktopSupport;
 import org.madlonkay.desktopsupport.OpenFilesEvent;
 import org.madlonkay.desktopsupport.OpenURIEvent;
 import org.madlonkay.desktopsupport.QuitResponse;
 import org.madlonkay.desktopsupport.QuitStrategy;
+import org.madlonkay.desktopsupport.ScreenSleepListener;
+import org.madlonkay.desktopsupport.SystemEventListener;
+import org.madlonkay.desktopsupport.SystemSleepListener;
+import org.madlonkay.desktopsupport.UserSessionEvent.Reason;
+import org.madlonkay.desktopsupport.UserSessionListener;
 
+import com.apple.eawt.AppEvent.AppForegroundEvent;
+import com.apple.eawt.AppEvent.AppHiddenEvent;
+import com.apple.eawt.AppEvent.AppReOpenedEvent;
+import com.apple.eawt.AppEvent.ScreenSleepEvent;
+import com.apple.eawt.AppEvent.SystemSleepEvent;
+import com.apple.eawt.AppEvent.UserSessionEvent;
 import com.apple.eawt.Application;
 
 public class AppleDesktopSupportImpl implements IDesktopSupport {
 
     public AppleDesktopSupportImpl() {
         Application.getApplication().setAboutHandler(null);
+    }
+
+    private final Map<SystemEventListener, com.apple.eawt.AppEventListener> listeners = Collections
+            .synchronizedMap(new IdentityHashMap<>());
+
+    @Override
+    public void addAppEventListener(SystemEventListener listener) {
+        Application.getApplication().addAppEventListener(wrap(listener));
+    }
+
+    private com.apple.eawt.AppEventListener wrap(SystemEventListener listener) {
+        if (listener instanceof AppForegroundListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.AppForegroundListener() {
+                @Override
+                public void appRaisedToForeground(AppForegroundEvent e) {
+                    ((AppForegroundListener) listener).appRaisedToForeground(e);
+                }
+
+                @Override
+                public void appMovedToBackground(AppForegroundEvent e) {
+                    ((AppForegroundListener) listener).appMovedToBackground(e);
+                }
+            });
+        } else if (listener instanceof AppHiddenListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.AppHiddenListener() {
+                @Override
+                public void appHidden(AppHiddenEvent e) {
+                    ((AppHiddenListener) listener).appHidden(e);
+                }
+
+                @Override
+                public void appUnhidden(AppHiddenEvent e) {
+                    ((AppHiddenListener) listener).appUnhidden(e);
+                }
+            });
+        } else if (listener instanceof AppReopenedListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.AppReOpenedListener() {
+                @Override
+                public void appReOpened(AppReOpenedEvent e) {
+                    ((AppReopenedListener) listener).appReopened(e);
+                }
+            });
+        } else if (listener instanceof ScreenSleepListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.ScreenSleepListener() {
+                @Override
+                public void screenAboutToSleep(ScreenSleepEvent e) {
+                    ((ScreenSleepListener) listener).screenAboutToSleep(e);
+                }
+
+                @Override
+                public void screenAwoke(ScreenSleepEvent e) {
+                    ((ScreenSleepListener) listener).screenAwoke(e);
+                }
+            });
+        } else if (listener instanceof SystemSleepListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.SystemSleepListener() {
+                @Override
+                public void systemAboutToSleep(SystemSleepEvent e) {
+                    ((SystemSleepListener) listener).systemAboutToSleep(e);
+                }
+
+                @Override
+                public void systemAwoke(SystemSleepEvent e) {
+                    ((SystemSleepListener) listener).systemAwoke(e);
+                }
+            });
+        } else if (listener instanceof UserSessionListener) {
+            return listeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.UserSessionListener() {
+                @Override
+                public void userSessionDeactivated(UserSessionEvent e) {
+                    ((UserSessionListener) listener).userSessionDeactivated(() -> Reason.UNSPECIFIED);
+                }
+
+                @Override
+                public void userSessionActivated(UserSessionEvent e) {
+                    ((UserSessionListener) listener).userSessionActivated(() -> Reason.UNSPECIFIED);
+                }
+            });
+        } else {
+            throw new RuntimeException("Unknown listener type: " + listener.getClass());
+        }
+    }
+
+    @Override
+    public void removeAppEventListener(SystemEventListener listener) {
+        Application.getApplication().removeAppEventListener(wrap(listener));
     }
 
     @Override

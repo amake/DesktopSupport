@@ -13,6 +13,18 @@ public class LibraryTest {
         new IDesktopSupport() {
 
             @Override
+            public void addAppEventListener(SystemEventListener listener) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void removeAppEventListener(SystemEventListener listener) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
             public void setAboutHandler(Consumer<Object> handler) {
                 // TODO Auto-generated method stub
 

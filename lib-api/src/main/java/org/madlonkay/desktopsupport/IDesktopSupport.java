@@ -4,6 +4,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public interface IDesktopSupport {
+    void addAppEventListener(SystemEventListener listener);
+
+    void removeAppEventListener(SystemEventListener listener);
+
     void setAboutHandler(Consumer<Object> handler);
 
     void setPreferencesHandler(Consumer<Object> handler);

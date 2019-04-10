@@ -9,8 +9,21 @@ import org.madlonkay.desktopsupport.OpenFilesEvent;
 import org.madlonkay.desktopsupport.OpenURIEvent;
 import org.madlonkay.desktopsupport.QuitResponse;
 import org.madlonkay.desktopsupport.QuitStrategy;
+import org.madlonkay.desktopsupport.SystemEventListener;
 
 public class DummyDesktopSupportImpl implements IDesktopSupport {
+
+    @Override
+    public void addAppEventListener(SystemEventListener listener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void removeAppEventListener(SystemEventListener listener) {
+        // TODO Auto-generated method stub
+
+    }
 
     @Override
     public void setAboutHandler(Consumer<Object> handler) {
