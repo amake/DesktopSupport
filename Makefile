@@ -24,3 +24,7 @@ clean:
 
 $(EXAMPLE_BIN):
 	JAVA_HOME=$(JAVA11_HOME) $(GRADLE) :example:install
+
+.PHONY: publish-local
+publish-local:
+	JAVA_HOME=$(JAVA11_HOME) $(GRADLE) :lib:publishToMavenLocal
