@@ -1,7 +1,12 @@
 package org.madlonkay.desktopsupport.impl;
 
+import java.awt.Image;
+import java.awt.PopupMenu;
+import java.awt.Window;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import javax.swing.JMenuBar;
 
 import org.madlonkay.desktopsupport.FilesEvent;
 import org.madlonkay.desktopsupport.IDesktopSupport;
@@ -75,6 +80,72 @@ public class DummyDesktopSupportImpl implements IDesktopSupport {
 
     @Override
     public void disableSuddenTermination() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void requestForeground(boolean allWindows) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void openHelpViewer() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setDefaultMenuBar(JMenuBar menuBar) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Image getDockIconImage() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setDockIconImage(Image image) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setDockIconBadge(String badge) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public PopupMenu getDockMenu() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setDockMenu(PopupMenu menu) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void requestUserAttention(boolean critical) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void requestToggleFullScreen(Window window) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setWindowCanFullScreen(Window window, boolean enabled) {
         // TODO Auto-generated method stub
 
     }

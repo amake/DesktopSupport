@@ -1,6 +1,11 @@
 package org.madlonkay.desktopsupport.impl;
 
 import java.awt.Desktop;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.PopupMenu;
+import java.awt.Taskbar;
+import java.awt.Window;
 import java.awt.desktop.AppForegroundEvent;
 import java.awt.desktop.AppHiddenEvent;
 import java.awt.desktop.AppReopenedEvent;
@@ -14,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import javax.swing.JMenuBar;
+import javax.swing.RootPaneContainer;
 
 import org.madlonkay.desktopsupport.AppForegroundListener;
 import org.madlonkay.desktopsupport.AppHiddenListener;
@@ -209,5 +217,62 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
     @Override
     public void disableSuddenTermination() {
         Desktop.getDesktop().disableSuddenTermination();
+    }
+
+    @Override
+    public void requestForeground(boolean allWindows) {
+        Desktop.getDesktop().requestForeground(allWindows);
+    }
+
+    @Override
+    public void openHelpViewer() {
+        Desktop.getDesktop().openHelpViewer();
+    }
+
+    @Override
+    public void setDefaultMenuBar(JMenuBar menuBar) {
+        Desktop.getDesktop().setDefaultMenuBar(menuBar);
+    }
+
+    @Override
+    public Image getDockIconImage() {
+        return Taskbar.getTaskbar().getIconImage();
+    }
+
+    @Override
+    public void setDockIconImage(Image image) {
+        Taskbar.getTaskbar().setIconImage(image);
+    }
+
+    @Override
+    public void setDockIconBadge(String badge) {
+        Taskbar.getTaskbar().setIconBadge(badge);
+    }
+
+    @Override
+    public PopupMenu getDockMenu() {
+        return Taskbar.getTaskbar().getMenu();
+    }
+
+    @Override
+    public void setDockMenu(PopupMenu menu) {
+        Taskbar.getTaskbar().setMenu(menu);
+    }
+
+    @Override
+    public void requestUserAttention(boolean critical) {
+        Taskbar.getTaskbar().requestUserAttention(true, critical);
+    }
+
+    @Override
+    public void requestToggleFullScreen(Window window) {
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(window);
+    }
+
+    @Override
+    public void setWindowCanFullScreen(Window window, boolean enabled) {
+        if (window instanceof RootPaneContainer) {
+            ((RootPaneContainer) window).getRootPane().putClientProperty("apple.awt.fullscreenable", enabled);
+        }
     }
 }

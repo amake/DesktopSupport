@@ -1,5 +1,8 @@
 package org.madlonkay.desktopsupport.impl;
 
+import java.awt.Image;
+import java.awt.PopupMenu;
+import java.awt.Window;
 import java.io.File;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -7,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import javax.swing.JMenuBar;
 
 import org.madlonkay.desktopsupport.AppForegroundListener;
 import org.madlonkay.desktopsupport.AppHiddenListener;
@@ -30,6 +35,7 @@ import com.apple.eawt.AppEvent.ScreenSleepEvent;
 import com.apple.eawt.AppEvent.SystemSleepEvent;
 import com.apple.eawt.AppEvent.UserSessionEvent;
 import com.apple.eawt.Application;
+import com.apple.eawt.FullScreenUtilities;
 
 public class AppleDesktopSupportImpl implements IDesktopSupport {
 
@@ -196,5 +202,60 @@ public class AppleDesktopSupportImpl implements IDesktopSupport {
     @Override
     public void disableSuddenTermination() {
         Application.getApplication().disableSuddenTermination();
+    }
+
+    @Override
+    public void requestForeground(boolean allWindows) {
+        Application.getApplication().requestForeground(allWindows);
+    }
+
+    @Override
+    public void openHelpViewer() {
+        Application.getApplication().openHelpViewer();
+    }
+
+    @Override
+    public void setDefaultMenuBar(JMenuBar menuBar) {
+        Application.getApplication().setDefaultMenuBar(menuBar);
+    }
+
+    @Override
+    public Image getDockIconImage() {
+        return Application.getApplication().getDockIconImage();
+    }
+
+    @Override
+    public void setDockIconImage(Image image) {
+        Application.getApplication().setDockIconImage(image);
+    }
+
+    @Override
+    public void setDockIconBadge(String badge) {
+        Application.getApplication().setDockIconBadge(badge);
+    }
+
+    @Override
+    public PopupMenu getDockMenu() {
+        return Application.getApplication().getDockMenu();
+    }
+
+    @Override
+    public void setDockMenu(PopupMenu menu) {
+        Application.getApplication().setDockMenu(menu);
+    }
+
+    @Override
+    public void requestUserAttention(boolean critical) {
+        Application.getApplication().requestUserAttention(critical);
+    }
+
+    @Override
+    public void requestToggleFullScreen(Window window) {
+        Application.getApplication().requestToggleFullScreen(window);
+    }
+
+    @Override
+    public void setWindowCanFullScreen(Window window, boolean enabled) {
+        FullScreenUtilities.setWindowCanFullScreen(window, enabled);
     }
 }
