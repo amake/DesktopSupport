@@ -2,9 +2,6 @@ plugins {
     id 'java-library'
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
 dependencies {
     api project(':lib-api')
     implementation 'com.massisframework:orange-extensions:1.3.1'

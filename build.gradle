@@ -11,6 +11,10 @@ allprojects {
     repositories {
         jcenter()
     }
+    plugins.withType(JavaPlugin) {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 task clean(type: Delete) {

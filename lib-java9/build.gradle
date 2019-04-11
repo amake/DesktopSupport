@@ -4,20 +4,16 @@ plugins {
 }
 
 ext {
-    fakeJavaVersion = '1.8'
-    realJavaVersion = '11'
+    compileJavaVersion = '11'
 }
 
-sourceCompatibility = fakeJavaVersion
-targetCompatibility = fakeJavaVersion
-
 compileJava {
-    sourceCompatibility = realJavaVersion
-    targetCompatibility = realJavaVersion
+    sourceCompatibility = compileJavaVersion
+    targetCompatibility = compileJavaVersion
 }
 
 eclipse {
-    def javaEntry = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-$realJavaVersion/"
+    def javaEntry = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-$compileJavaVersion/"
     classpath {
         file {
             whenMerged { classpath ->

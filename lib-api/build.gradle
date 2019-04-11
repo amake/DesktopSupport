@@ -2,9 +2,6 @@ plugins {
     id 'java-library'
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
 group 'org.madlonkay'
 version '0.1-SNAPSHOT'
 
