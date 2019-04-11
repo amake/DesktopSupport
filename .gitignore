@@ -6,3 +6,7 @@ build
 
 bin
 local.properties
+
+# IntelliJ
+*.iml
+.idea
