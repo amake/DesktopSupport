@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'org.madlonkay'
-version '0.2.0-SNAPSHOT'
+version '0.2.0'
 
 dependencies {
     // This should really be an 'api' dependency, but shadow plugin bugs out:
