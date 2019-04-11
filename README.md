@@ -2,7 +2,7 @@
 
 This library bridges the Apple Java Extensions APIs and the JEP 272 desktop APIs
 added in Java 9. It is intended for use by applications that want to support
-running on both Java 8 and Java 9+.
+running on both Java 8 and Java 11.
 
 - [Apple Java Extensions](https://developer.apple.com/library/archive/samplecode/AppleJavaExtensions/Introduction/Intro.html)
 - [Apple Java Extensions Javadoc](https://coderanch.com/how-to/javadoc/appledoc/api/)
@@ -22,7 +22,7 @@ no-op implementation, so critical logic must not be placed there.
 |--------------|----------|----------------    |
 | Java 8       | macOS    | `com.apple.eawt.*` |
 | Java 8       | Other    | No-op              |
-| Java 9+      | Any      | `java.awt.*`       |
+| Java 11      | Any      | `java.awt.*`       |
 
 ### Coverage
 
@@ -31,7 +31,9 @@ no-op implementation, so critical logic must not be placed there.
 
 ## Requirements
 
-Java 8+
+Java 8+ is required to run.
+
+Java 11 is required in order to build.
 
 ## Usage
 
