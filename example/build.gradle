@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'eclipse'
 }
 
 sourceCompatibility = '1.8'
@@ -17,3 +18,14 @@ dependencies {
 }
 
 mainClassName = 'org.madlonkay.desktopsupport.example.App'
+
+eclipse {
+    classpath {
+        file {
+            withXml {
+                def node = it.asNode()
+                node.appendNode('classpathentry', [kind: 'src', path: '/lib-api'])
+            }
+        }
+    }
+}
