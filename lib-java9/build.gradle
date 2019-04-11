@@ -12,6 +12,7 @@ compileJava {
     targetCompatibility = compileJavaVersion
 }
 
+// Hack to convince Eclipse to let us use Java 11
 eclipse {
     def javaEntry = "org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-$compileJavaVersion/"
     classpath {

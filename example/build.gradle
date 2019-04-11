@@ -19,6 +19,7 @@ dependencies {
 
 mainClassName = 'org.madlonkay.desktopsupport.example.App'
 
+// Hack to shut up errors in Eclipse about missing lib-api class.
 eclipse {
     classpath {
         file {
