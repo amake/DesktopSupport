@@ -32,8 +32,22 @@ shadowJar {
 }
 
 task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
     classifier = 'sources'
+    doFirst{
+        rootProject.subprojects.findAll { it.name.startsWith('lib-') }.each { proj ->
+            from proj.sourceSets.main.allJava
+        }
+    }
+}
+
+javadoc {
+    title = "DesktopSupport $version"
+    doFirst{
+        rootProject.subprojects.findAll { it.name.startsWith('lib-') }.each { proj ->
+            source += proj.sourceSets.main.allJava
+            classpath += proj.sourceSets.main.compileClasspath
+        }
+    }
 }
 
 task javadocJar(type: Jar) {
