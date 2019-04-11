@@ -16,7 +16,7 @@ public final class DesktopSupport {
 
     private static IDesktopSupport impl;
 
-    public static IDesktopSupport getSupport() {
+    public static synchronized IDesktopSupport getSupport() {
         if (impl == null) {
             impl = getSupportImpl();
             LOGGER.log(Level.FINEST, "Using DesktopSupport implementation: " + impl.getClass().getName());
