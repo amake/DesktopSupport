@@ -17,6 +17,7 @@ import org.madlonkay.desktopsupport.AppForegroundListener;
 import org.madlonkay.desktopsupport.AppHiddenListener;
 import org.madlonkay.desktopsupport.AppReopenedListener;
 import org.madlonkay.desktopsupport.FilesEvent;
+import org.madlonkay.desktopsupport.FullScreenListener;
 import org.madlonkay.desktopsupport.IDesktopSupport;
 import org.madlonkay.desktopsupport.OpenFilesEvent;
 import org.madlonkay.desktopsupport.OpenURIEvent;
@@ -31,6 +32,7 @@ import org.madlonkay.desktopsupport.UserSessionListener;
 import com.apple.eawt.AppEvent.AppForegroundEvent;
 import com.apple.eawt.AppEvent.AppHiddenEvent;
 import com.apple.eawt.AppEvent.AppReOpenedEvent;
+import com.apple.eawt.AppEvent.FullScreenEvent;
 import com.apple.eawt.AppEvent.ScreenSleepEvent;
 import com.apple.eawt.AppEvent.SystemSleepEvent;
 import com.apple.eawt.AppEvent.UserSessionEvent;
@@ -124,9 +126,39 @@ public class AppleDesktopSupportImpl implements IDesktopSupport {
         }
     }
 
+    private final Map<FullScreenListener, com.apple.eawt.FullScreenListener> fsListeners = Collections
+            .synchronizedMap(new IdentityHashMap<>());
+
+    private com.apple.eawt.FullScreenListener wrap(FullScreenListener listener) {
+        return fsListeners.computeIfAbsent(listener, (k) -> new com.apple.eawt.FullScreenListener() {
+            @Override
+            public void windowEnteringFullScreen(FullScreenEvent evt) {
+                listener.windowEnteringFullScreen(evt::getWindow);
+            }
+
+            @Override
+            public void windowEnteredFullScreen(FullScreenEvent evt) {
+                listener.windowEnteredFullScreen(evt::getWindow);
+            }
+
+            @Override
+            public void windowExitingFullScreen(FullScreenEvent evt) {
+                listener.windowExitingFullScreen(evt::getWindow);
+            }
+
+            @Override
+            public void windowExitedFullScreen(FullScreenEvent evt) {
+                listener.windowExitedFullScreen(evt::getWindow);
+            }
+        });
+    }
+
     @Override
     public void removeAppEventListener(SystemEventListener listener) {
-        Application.getApplication().removeAppEventListener(wrap(listener));
+        com.apple.eawt.AppEventListener wrapped = listeners.remove(listener);
+        if (wrapped != null) {
+            Application.getApplication().removeAppEventListener(wrapped);
+        }
     }
 
     @Override
@@ -257,5 +289,18 @@ public class AppleDesktopSupportImpl implements IDesktopSupport {
     @Override
     public void setWindowCanFullScreen(Window window, boolean enabled) {
         FullScreenUtilities.setWindowCanFullScreen(window, enabled);
+    }
+
+    @Override
+    public void addFullScreenListenerTo(Window window, FullScreenListener listener) {
+        FullScreenUtilities.addFullScreenListenerTo(window, wrap(listener));
+    }
+
+    @Override
+    public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
+        com.apple.eawt.FullScreenListener wrapped = fsListeners.remove(listener);
+        if (wrapped != null) {
+            FullScreenUtilities.removeFullScreenListenerFrom(window, wrapped);
+        }
     }
 }

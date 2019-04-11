@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 import javax.swing.JMenuBar;
 
 import org.madlonkay.desktopsupport.FilesEvent;
+import org.madlonkay.desktopsupport.FullScreenListener;
 import org.madlonkay.desktopsupport.IDesktopSupport;
 import org.madlonkay.desktopsupport.OpenFilesEvent;
 import org.madlonkay.desktopsupport.OpenURIEvent;
@@ -146,6 +147,18 @@ public class DummyDesktopSupportImpl implements IDesktopSupport {
 
     @Override
     public void setWindowCanFullScreen(Window window, boolean enabled) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addFullScreenListenerTo(Window window, FullScreenListener listener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
         // TODO Auto-generated method stub
 
     }

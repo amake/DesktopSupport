@@ -56,4 +56,8 @@ public interface IDesktopSupport {
     // Methods on FullScreenUtilities
 
     void setWindowCanFullScreen(Window window, boolean enabled);
+
+    void addFullScreenListenerTo(Window window, FullScreenListener listener);
+
+    void removeFullScreenListenerFrom(Window window, FullScreenListener listener);
 }

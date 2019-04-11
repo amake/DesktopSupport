@@ -27,6 +27,7 @@ import org.madlonkay.desktopsupport.AppForegroundListener;
 import org.madlonkay.desktopsupport.AppHiddenListener;
 import org.madlonkay.desktopsupport.AppReopenedListener;
 import org.madlonkay.desktopsupport.FilesEvent;
+import org.madlonkay.desktopsupport.FullScreenListener;
 import org.madlonkay.desktopsupport.IDesktopSupport;
 import org.madlonkay.desktopsupport.OpenFilesEvent;
 import org.madlonkay.desktopsupport.OpenURIEvent;
@@ -141,7 +142,10 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
 
     @Override
     public void removeAppEventListener(SystemEventListener listener) {
-        Desktop.getDesktop().removeAppEventListener(wrap(listener));
+        java.awt.desktop.SystemEventListener wrapped = listeners.remove(listener);
+        if (wrapped != null) {
+            Desktop.getDesktop().removeAppEventListener(wrapped);
+        }
     }
 
     @Override
@@ -274,5 +278,15 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
         if (window instanceof RootPaneContainer) {
             ((RootPaneContainer) window).getRootPane().putClientProperty("apple.awt.fullscreenable", enabled);
         }
+    }
+
+    @Override
+    public void addFullScreenListenerTo(Window window, FullScreenListener listener) {
+        // Not supported
+    }
+
+    @Override
+    public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
+        // Not supported
     }
 }

@@ -149,6 +149,18 @@ public class LibraryTest {
 
             }
 
+            @Override
+            public void addFullScreenListenerTo(Window window, FullScreenListener listener) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
+                // TODO Auto-generated method stub
+
+            }
+
         };
     }
 }
