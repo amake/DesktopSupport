@@ -58,6 +58,6 @@ bintray {
     publications = ['myPublication']
     pkg {
         repo = 'maven'
-        name = 'desktopsupport'
+        name = 'DesktopSupport'
     }
 }
