@@ -9,7 +9,9 @@ group 'org.madlonkay'
 version '0.1-SNAPSHOT'
 
 dependencies {
-    implementation project(':lib-api')
+    // This should really be an 'api' dependency, but shadow plugin bugs out:
+    // https://github.com/johnrengelman/shadow/issues/473
+    compile project(':lib-api')
     implementation project(':lib-java9')
     implementation project(':lib-apple')
 
