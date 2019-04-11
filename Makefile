@@ -4,6 +4,7 @@ FIND_JAVA_HOME = $(shell /usr/libexec/java_home -f -v $(1))
 JAVA8_HOME := $(call FIND_JAVA_HOME,1.8)
 JAVA11_HOME := $(call FIND_JAVA_HOME,11)
 TEST_JAVA_OPTS := -Djava.util.logging.config.file="$(PWD)/example/logging.properties"
+JAVA_FILES = $(shell find . -name *.java)
 
 .PHONY: test
 test: test-apple test-java9
@@ -22,7 +23,7 @@ test-java9: $(EXAMPLE_BIN)
 clean:
 	$(GRADLE) :example:clean
 
-$(EXAMPLE_BIN):
+$(EXAMPLE_BIN): $(JAVA_FILES)
 	JAVA_HOME=$(JAVA11_HOME) $(GRADLE) :example:install
 
 .PHONY: publish-local
