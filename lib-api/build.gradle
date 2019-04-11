@@ -2,9 +2,6 @@ plugins {
     id 'java-library'
 }
 
-group 'org.madlonkay'
-version '0.1-SNAPSHOT'
-
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
     classifier = 'sources'
