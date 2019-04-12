@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+if (($# < 1)); then
+    cat <<EOF
+usage: $(basename "$0") PATH [ARGS ...]
+
+Launch application at PATH as a macOS GUI application, able to accept
+AppleScript events.
+
+The application must accept as its first argument the path of a file to which it
+outputs its logs; this file will be tailed synchronously by this script until
+the program exits.
+
+The application must further print its process ID to the log immediately upon
+startup. This is a workaround for lsof being extremely slow on macOS.
+EOF
+fi
+
+apppath="$1"
+shift
+
+# Stranger wait: wait for a non-child
+swait() {
+    while kill -0 $1 2>/dev/null; do sleep 1; done
+}
+
+tmpname=$(basename "$0")
+tmpfile=$(mktemp /tmp/${tmpname}.XXXXXX) || exit 1
+trap "rm -f $tmpfile" EXIT
+
+# First arg is log file
+open -a "$apppath" --args $tmpfile "$@"
+sleep 1
+
+# App first writes own PID to log
+apppid=$(head -n 1 $tmpfile)
+
+# Tail while app is open
+tail -f $tmpfile &
+swait $apppid

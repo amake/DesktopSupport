@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
     id 'java'
     id 'application'
@@ -18,6 +20,42 @@ dependencies {
 }
 
 mainClassName = 'org.madlonkay.desktopsupport.example.CliApp'
+
+ext {
+    appApplicationName = 'guiapp'
+    appWrapper = "${appApplicationName}wrapper"
+}
+
+distributions {
+  app {
+    contents {
+        into("DesktopSupportExampleApp.app/Contents/MacOS") {
+            with main.contents
+        }
+        from(projectDir) {
+            include 'Info.plist'
+            into "DesktopSupportExampleApp.app/Contents"
+            filter(ReplaceTokens, tokens: [WRAPPER_NAME: appWrapper.toString()])
+        }
+        from(projectDir) {
+            include 'guiappwrapper'
+            into "DesktopSupportExampleApp.app/Contents/MacOS/$executableDir"
+            filter(ReplaceTokens, tokens: [APPLICATION_NAME: appApplicationName])
+        }
+    }
+  }
+}
+
+task appScripts(type: CreateStartScripts) {
+    applicationName = appApplicationName
+    mainClassName = 'org.madlonkay.desktopsupport.example.GuiApp'
+    outputDir = file("$buildDir/appScripts")
+    classpath = startScripts.classpath
+}
+
+applicationDistribution.from(appScripts) {
+    into executableDir
+}
 
 // Hack to shut up errors in Eclipse about missing lib-api class.
 eclipse {

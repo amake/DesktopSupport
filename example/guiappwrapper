@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+dir=$(dirname "$0")
+
+# Consume the first arg if it is a file and redirect stdout to it, per
+# launch-tail script
+if [[ -f "$1" ]]; then
+    exec >"$1"
+    shift
+fi
+
+# Echo own PID per launch-tail script
+echo $$
+
+# Consume the next arg if it looks like a Java version so we can set JAVA_HOME
+# accordingly
+if [[ $1 =~ [1-9][0-9.]*\+?$ ]]; then
+    java_version=$1
+    shift
+fi
+
+export JAVA_HOME=$(/usr/libexec/java_home -f -v ${java_version:-1.8+})
+
+exec $dir/@APPLICATION_NAME@ "$@"
