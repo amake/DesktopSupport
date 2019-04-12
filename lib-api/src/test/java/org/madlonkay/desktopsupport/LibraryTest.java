@@ -6,8 +6,6 @@ package org.madlonkay.desktopsupport;
 import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.Window;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javax.swing.JMenuBar;
 
@@ -30,37 +28,37 @@ public class LibraryTest {
             }
 
             @Override
-            public void setAboutHandler(Consumer<Object> handler) {
+            public void setAboutHandler(AboutHandler handler) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
-            public void setPreferencesHandler(Consumer<Object> handler) {
+            public void setPreferencesHandler(PreferencesHandler handler) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
-            public void setOpenFilesHandler(Consumer<OpenFilesEvent> handler) {
+            public void setOpenFilesHandler(OpenFilesHandler handler) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
-            public void setPrintFilesHandler(Consumer<FilesEvent> handler) {
+            public void setPrintFilesHandler(PrintFilesHandler handler) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
-            public void setOpenURIHandler(Consumer<OpenURIEvent> handler) {
+            public void setOpenURIHandler(OpenURIHandler handler) {
                 // TODO Auto-generated method stub
 
             }
 
             @Override
-            public void setQuitHandler(BiConsumer<Object, QuitResponse> handler) {
+            public void setQuitHandler(QuitHandler handler) {
                 // TODO Auto-generated method stub
 
             }

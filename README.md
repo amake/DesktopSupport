@@ -52,9 +52,14 @@ DesktopSupport.getSupport().setAboutHandler(e -> {
 });
 ```
 
-The API is meant to be used with functional lambdas wherever possible. When an
-event object is of type `Object`, the underlying implementation-specific object
-is provided as-is.
+The API is meant to mostly match the ones it wraps, but it is not quite a
+drop-in replacement:
+
+- Event objects that have no methods or payloads (e.g. `AboutEvent`) are just
+  `Object`
+- `FullScreenUtilities` (Apple) and `Taskbar`/`GraphicsEnvironment`/etc. (Java
+  9) methods are on `IDesktopSupport` with everything else rather than in a
+  separate class
 
 ## License
 

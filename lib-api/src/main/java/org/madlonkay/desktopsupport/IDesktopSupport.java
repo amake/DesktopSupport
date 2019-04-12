@@ -3,8 +3,6 @@ package org.madlonkay.desktopsupport;
 import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.Window;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javax.swing.JMenuBar;
 
@@ -13,17 +11,17 @@ public interface IDesktopSupport {
 
     void removeAppEventListener(SystemEventListener listener);
 
-    void setAboutHandler(Consumer<Object> handler);
+    void setAboutHandler(AboutHandler handler);
 
-    void setPreferencesHandler(Consumer<Object> handler);
+    void setPreferencesHandler(PreferencesHandler handler);
 
-    void setOpenFilesHandler(Consumer<OpenFilesEvent> handler);
+    void setOpenFilesHandler(OpenFilesHandler handler);
 
-    void setPrintFilesHandler(Consumer<FilesEvent> handler);
+    void setPrintFilesHandler(PrintFilesHandler handler);
 
-    void setOpenURIHandler(Consumer<OpenURIEvent> handler);
+    void setOpenURIHandler(OpenURIHandler handler);
 
-    void setQuitHandler(BiConsumer<Object, QuitResponse> handler);
+    void setQuitHandler(QuitHandler handler);
 
     void setQuitStrategy(QuitStrategy strategy);
 

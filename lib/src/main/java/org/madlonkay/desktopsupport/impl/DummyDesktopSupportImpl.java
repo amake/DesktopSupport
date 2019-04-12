@@ -3,17 +3,17 @@ package org.madlonkay.desktopsupport.impl;
 import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.Window;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javax.swing.JMenuBar;
 
-import org.madlonkay.desktopsupport.FilesEvent;
+import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.FullScreenListener;
 import org.madlonkay.desktopsupport.IDesktopSupport;
-import org.madlonkay.desktopsupport.OpenFilesEvent;
-import org.madlonkay.desktopsupport.OpenURIEvent;
-import org.madlonkay.desktopsupport.QuitResponse;
+import org.madlonkay.desktopsupport.OpenFilesHandler;
+import org.madlonkay.desktopsupport.OpenURIHandler;
+import org.madlonkay.desktopsupport.PreferencesHandler;
+import org.madlonkay.desktopsupport.PrintFilesHandler;
+import org.madlonkay.desktopsupport.QuitHandler;
 import org.madlonkay.desktopsupport.QuitStrategy;
 import org.madlonkay.desktopsupport.SystemEventListener;
 
@@ -32,37 +32,37 @@ public class DummyDesktopSupportImpl implements IDesktopSupport {
     }
 
     @Override
-    public void setAboutHandler(Consumer<Object> handler) {
+    public void setAboutHandler(AboutHandler handler) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setPreferencesHandler(Consumer<Object> handler) {
+    public void setPreferencesHandler(PreferencesHandler handler) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setOpenFilesHandler(Consumer<OpenFilesEvent> handler) {
+    public void setOpenFilesHandler(OpenFilesHandler handler) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setPrintFilesHandler(Consumer<FilesEvent> handler) {
+    public void setPrintFilesHandler(PrintFilesHandler handler) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setOpenURIHandler(Consumer<OpenURIEvent> handler) {
+    public void setOpenURIHandler(OpenURIHandler handler) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setQuitHandler(BiConsumer<Object, QuitResponse> handler) {
+    public void setQuitHandler(QuitHandler handler) {
         // TODO Auto-generated method stub
 
     }

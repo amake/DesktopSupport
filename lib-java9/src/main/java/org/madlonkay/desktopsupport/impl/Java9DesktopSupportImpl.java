@@ -17,20 +17,22 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import javax.swing.JMenuBar;
 import javax.swing.RootPaneContainer;
 
+import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.AppForegroundListener;
 import org.madlonkay.desktopsupport.AppHiddenListener;
 import org.madlonkay.desktopsupport.AppReopenedListener;
-import org.madlonkay.desktopsupport.FilesEvent;
 import org.madlonkay.desktopsupport.FullScreenListener;
 import org.madlonkay.desktopsupport.IDesktopSupport;
 import org.madlonkay.desktopsupport.OpenFilesEvent;
-import org.madlonkay.desktopsupport.OpenURIEvent;
+import org.madlonkay.desktopsupport.OpenFilesHandler;
+import org.madlonkay.desktopsupport.OpenURIHandler;
+import org.madlonkay.desktopsupport.PreferencesHandler;
+import org.madlonkay.desktopsupport.PrintFilesHandler;
+import org.madlonkay.desktopsupport.QuitHandler;
 import org.madlonkay.desktopsupport.QuitResponse;
 import org.madlonkay.desktopsupport.QuitStrategy;
 import org.madlonkay.desktopsupport.ScreenSleepListener;
@@ -149,18 +151,18 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
     }
 
     @Override
-    public void setAboutHandler(Consumer<Object> handler) {
-        Desktop.getDesktop().setAboutHandler(evt -> handler.accept(evt));
+    public void setAboutHandler(AboutHandler handler) {
+        Desktop.getDesktop().setAboutHandler(evt -> handler.handleAbout(evt));
     }
 
     @Override
-    public void setPreferencesHandler(Consumer<Object> handler) {
-        Desktop.getDesktop().setPreferencesHandler(evt -> handler.accept(evt));
+    public void setPreferencesHandler(PreferencesHandler handler) {
+        Desktop.getDesktop().setPreferencesHandler(evt -> handler.handlePreferences(evt));
     }
 
     @Override
-    public void setOpenFilesHandler(Consumer<OpenFilesEvent> handler) {
-        Desktop.getDesktop().setOpenFileHandler(evt -> handler.accept(new OpenFilesEvent() {
+    public void setOpenFilesHandler(OpenFilesHandler handler) {
+        Desktop.getDesktop().setOpenFileHandler(evt -> handler.openFiles(new OpenFilesEvent() {
             @Override
             public List<File> getFiles() {
                 return evt.getFiles();
@@ -174,18 +176,18 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
     }
 
     @Override
-    public void setPrintFilesHandler(Consumer<FilesEvent> handler) {
-        Desktop.getDesktop().setPrintFileHandler(evt -> handler.accept(evt::getFiles));
+    public void setPrintFilesHandler(PrintFilesHandler handler) {
+        Desktop.getDesktop().setPrintFileHandler(evt -> handler.printFiles(evt::getFiles));
     }
 
     @Override
-    public void setOpenURIHandler(Consumer<OpenURIEvent> handler) {
-        Desktop.getDesktop().setOpenURIHandler(evt -> handler.accept(evt::getURI));
+    public void setOpenURIHandler(OpenURIHandler handler) {
+        Desktop.getDesktop().setOpenURIHandler(evt -> handler.openURI(evt::getURI));
     }
 
     @Override
-    public void setQuitHandler(BiConsumer<Object, QuitResponse> handler) {
-        Desktop.getDesktop().setQuitHandler((evt, response) -> handler.accept(evt, new QuitResponse() {
+    public void setQuitHandler(QuitHandler handler) {
+        Desktop.getDesktop().setQuitHandler((evt, response) -> handler.handleQuitRequestWith(evt, new QuitResponse() {
             @Override
             public void performQuit() {
                 response.performQuit();
