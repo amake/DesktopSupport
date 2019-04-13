@@ -6,9 +6,9 @@ package org.madlonkay.desktopsupport.example;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AppTest {
+public class CliAppTest {
     @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
+        CliApp classUnderTest = new CliApp();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }

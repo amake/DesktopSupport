@@ -17,7 +17,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-mainClassName = 'org.madlonkay.desktopsupport.example.App'
+mainClassName = 'org.madlonkay.desktopsupport.example.CliApp'
 
 // Hack to shut up errors in Eclipse about missing lib-api class.
 eclipse {
