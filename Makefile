@@ -41,3 +41,7 @@ $(EXAMPLE_APP): $(JAVA_FILES)
 .PHONY: publish-local
 publish-local:
 	$(GRADLE) :lib:publishToMavenLocal
+
+.PHONY: publish
+publish:
+	$(GRADLE) clean :lib:bintray
