@@ -18,13 +18,13 @@ test-apple: export JAVA_HOME := $(JAVA8_HOME)
 test-apple: $(EXAMPLE_BIN) $(EXAMPLE_APP)
 	$(GRADLE) :lib-apple:test
 	JAVA_OPTS=$(TEST_JAVA_OPTS) $(EXAMPLE_BIN)
-	$(EXPECT_APP) 1.8
+	$(EXPECT_APP) $(PWD)/$(EXAMPLE_APP) 1.8
 
 .PHONY: test-java9
 test-java9: $(EXAMPLE_BIN) $(EXAMPLE_APP)
 	$(GRADLE) test
 	JAVA_OPTS=$(TEST_JAVA_OPTS) $(EXAMPLE_BIN)
-	$(EXPECT_APP) 11
+	$(EXPECT_APP) $(PWD)/$(EXAMPLE_APP) 11
 
 .PHONY: clean
 clean:

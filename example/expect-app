@@ -1,21 +1,21 @@
 #!/usr/bin/expect -f
 # -*- mode: tcl; -*-
 
-proc quit {} {
-    exec osascript -e {tell application "DesktopSupportExampleApp" to quit}
+proc quit {name} {
+    exec osascript -e "tell application \"$name\" to quit"
 }
 
 set here [file dirname [file normalize [info script]]]
+set app_path [lindex $argv 0]
+set app_name [file rootname [file tail $app_path]]
 
-set java_version [lindex $argv 0]
+set java_version [lindex $argv 1]
 if {$java_version eq ""} {
     set java_version 1.8+
 }
 
-spawn $here/launch-tail $here/build/install/example-app/DesktopSupportExampleApp.app $java_version
-expect "Hello world."
-catch quit
-expect "Got quit event; quitCount=0"
-catch quit
+spawn $here/launch-tail $app_path $java_version
+expect "Hello world." {catch {quit $app_name}}
+expect "Got quit event; quitCount=0" {catch {quit $app_name}}
 expect "Got quit event; quitCount=1"
 expect eof
