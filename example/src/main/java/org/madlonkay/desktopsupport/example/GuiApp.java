@@ -39,6 +39,7 @@ public class GuiApp implements QuitHandler {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
+                log.println("Java " + System.getProperty("java.version"));
                 log.println(getGreeting());
             }
         });
