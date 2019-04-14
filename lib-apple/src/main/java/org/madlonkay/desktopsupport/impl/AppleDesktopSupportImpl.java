@@ -44,7 +44,8 @@ import com.apple.eawt.FullScreenUtilities;
 public class AppleDesktopSupportImpl implements IDesktopSupport {
 
     public AppleDesktopSupportImpl() {
-        Application.getApplication().setAboutHandler(null);
+        // Call method only available in Apple Java Extensions to test compatibility
+        Application.getApplication().getDockIconImage();
     }
 
     private final Map<SystemEventListener, com.apple.eawt.AppEventListener> listeners = Collections

@@ -44,7 +44,8 @@ import org.madlonkay.desktopsupport.UserSessionListener;
 public class Java9DesktopSupportImpl implements IDesktopSupport {
 
     public Java9DesktopSupportImpl() {
-        Desktop.getDesktop().setAboutHandler(null);
+        // Call method only available in Java 9+ to test compatibility
+        Taskbar.getTaskbar().getIconImage();
     }
 
     private final Map<SystemEventListener, java.awt.desktop.SystemEventListener> listeners = Collections
