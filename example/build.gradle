@@ -6,13 +6,6 @@ plugins {
     id 'eclipse'
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
-repositories {
-    jcenter()
-}
-
 dependencies {
     implementation project(path: ':lib', configuration: 'shadow')
 
