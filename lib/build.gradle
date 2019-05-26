@@ -20,19 +20,19 @@ dependencies {
 }
 
 tasks.withType(Jar) {
-    baseName = 'desktopsupport'
+    archiveBaseName = 'desktopsupport'
 }
 
 jar {
-    classifier = 'single'
+    archiveClassifier = 'single'
 }
 
 shadowJar {
-    classifier = null
+    archiveClassifier = null
 }
 
 task sourceJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     doFirst{
         rootProject.subprojects.findAll { it.name.startsWith('lib-') }.each { proj ->
             from proj.sourceSets.main.allJava
@@ -52,7 +52,7 @@ javadoc {
 
 task javadocJar(type: Jar) {
     from javadoc.outputs
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
 }
 
 publishing {
