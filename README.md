@@ -63,4 +63,4 @@ drop-in replacement:
 
 ## License
 
-GNU General Public License v2 with Classpath Exception
+Apache 2.0
