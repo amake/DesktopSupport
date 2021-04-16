@@ -48,9 +48,9 @@ publish-local:
 	$(GRADLE) :lib:publishToMavenLocal
 
 .PHONY: publish
-publish: ## Publish to Bintray
+publish: ## Publish to Maven Central
 publish:
-	$(GRADLE) clean :lib:bintray
+	$(GRADLE) clean publish
 
 .PHONY: help
 help: ## Show this help text

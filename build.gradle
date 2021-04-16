@@ -1,15 +1,6 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-    }
-}
-
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
     plugins.withType(JavaPlugin) {
         sourceCompatibility = '1.8'
