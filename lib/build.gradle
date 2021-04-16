@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.jfrog.bintray'
-    id 'com.github.johnrengelman.shadow' version '5.0.0'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
 group 'org.madlonkay'
@@ -28,7 +28,7 @@ jar {
 }
 
 shadowJar {
-    archiveClassifier = null
+    archiveClassifier = ''
 }
 
 task sourceJar(type: Jar) {
