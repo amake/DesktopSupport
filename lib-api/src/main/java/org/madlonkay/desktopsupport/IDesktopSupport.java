@@ -35,7 +35,7 @@ public interface IDesktopSupport {
 
     void setDefaultMenuBar(JMenuBar menuBar);
 
-    // Methods moved to Taskbar in Java
+    // Methods moved to Taskbar in Java 9
 
     Image getDockIconImage();
 
