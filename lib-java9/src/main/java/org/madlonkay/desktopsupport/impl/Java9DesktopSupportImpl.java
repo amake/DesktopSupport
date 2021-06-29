@@ -52,10 +52,10 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
             .synchronizedMap(new IdentityHashMap<>());
 
     @Override
-    public void addAppEventListener(SystemEventListener listener) {        
+    public void addAppEventListener(SystemEventListener listener) {
         Desktop.getDesktop().addAppEventListener(wrap(listener));
     }
-    
+
     private java.awt.desktop.SystemEventListener wrap(SystemEventListener listener) {
         if (listener instanceof AppForegroundListener) {
             return listeners.computeIfAbsent(listener, (k) -> new java.awt.desktop.AppForegroundListener() {
