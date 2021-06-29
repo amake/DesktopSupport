@@ -1,5 +1,7 @@
 package org.madlonkay.desktopsupport;
 
+import java.util.EventObject;
+
 public interface AppReopenedListener {
-    void appReopened(Object e);
+    void appReopened(EventObject e);
 }

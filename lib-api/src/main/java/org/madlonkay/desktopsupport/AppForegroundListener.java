@@ -1,7 +1,9 @@
 package org.madlonkay.desktopsupport;
 
-public interface AppForegroundListener extends SystemEventListener {
-    public void appRaisedToForeground(Object e);
+import java.util.EventObject;
 
-    public void appMovedToBackground(Object e);
+public interface AppForegroundListener extends SystemEventListener {
+    public void appRaisedToForeground(EventObject e);
+
+    public void appMovedToBackground(EventObject e);
 }

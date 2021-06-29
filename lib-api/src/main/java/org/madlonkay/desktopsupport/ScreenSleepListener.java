@@ -1,7 +1,9 @@
 package org.madlonkay.desktopsupport;
 
-public interface ScreenSleepListener extends SystemEventListener {
-    void screenAboutToSleep(Object e);
+import java.util.EventObject;
 
-    void screenAwoke(Object e);
+public interface ScreenSleepListener extends SystemEventListener {
+    void screenAboutToSleep(EventObject e);
+
+    void screenAwoke(EventObject e);
 }

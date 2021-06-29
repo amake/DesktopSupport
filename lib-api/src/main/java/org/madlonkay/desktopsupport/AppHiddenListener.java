@@ -1,7 +1,9 @@
 package org.madlonkay.desktopsupport;
 
-public interface AppHiddenListener extends SystemEventListener {
-    public void appHidden(Object e);
+import java.util.EventObject;
 
-    public void appUnhidden(Object e);
+public interface AppHiddenListener extends SystemEventListener {
+    public void appHidden(EventObject e);
+
+    public void appUnhidden(EventObject e);
 }
