@@ -28,6 +28,7 @@ no-op implementation, so critical logic must not be placed there.
 
 - Non-deprecated methods on `com.apple.eawt.Application`
 - Methods on `com.apple.eawt.FullScreenUtilities`
+- `UIManager#createLookAndFeel` from Java 9+
 
 ## Requirements
 

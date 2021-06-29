@@ -8,6 +8,7 @@ import java.awt.PopupMenu;
 import java.awt.Window;
 
 import javax.swing.JMenuBar;
+import javax.swing.LookAndFeel;
 
 import org.junit.Test;
 
@@ -159,6 +160,11 @@ public class LibraryTest {
 
             }
 
+            @Override
+            public LookAndFeel createLookAndFeel(String name) throws Exception {
+                // TODO Auto-generated method stub
+                return null;
+            }
         };
     }
 }

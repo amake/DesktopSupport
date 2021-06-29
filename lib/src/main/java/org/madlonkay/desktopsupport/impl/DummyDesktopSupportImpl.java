@@ -5,6 +5,7 @@ import java.awt.PopupMenu;
 import java.awt.Window;
 
 import javax.swing.JMenuBar;
+import javax.swing.LookAndFeel;
 
 import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.FullScreenListener;
@@ -163,4 +164,9 @@ public class DummyDesktopSupportImpl implements IDesktopSupport {
 
     }
 
+    @Override
+    public LookAndFeel createLookAndFeel(String name) throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

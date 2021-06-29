@@ -5,6 +5,7 @@ import java.awt.PopupMenu;
 import java.awt.Window;
 
 import javax.swing.JMenuBar;
+import javax.swing.LookAndFeel;
 
 public interface IDesktopSupport {
     void addAppEventListener(SystemEventListener listener);
@@ -58,4 +59,8 @@ public interface IDesktopSupport {
     void addFullScreenListenerTo(Window window, FullScreenListener listener);
 
     void removeFullScreenListenerFrom(Window window, FullScreenListener listener);
+
+    // Methods on UIManager
+
+    LookAndFeel createLookAndFeel(String name) throws Exception;
 }

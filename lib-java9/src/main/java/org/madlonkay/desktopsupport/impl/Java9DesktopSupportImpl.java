@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JMenuBar;
+import javax.swing.LookAndFeel;
 import javax.swing.RootPaneContainer;
+import javax.swing.UIManager;
 
 import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.AppForegroundListener;
@@ -291,5 +293,10 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
     @Override
     public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
         // Not supported
+    }
+
+    @Override
+    public LookAndFeel createLookAndFeel(String name) throws Exception {
+        return UIManager.createLookAndFeel(name);
     }
 }

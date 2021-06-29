@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JMenuBar;
+import javax.swing.LookAndFeel;
 
 import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.AppForegroundListener;
@@ -306,5 +307,10 @@ public class AppleDesktopSupportImpl implements IDesktopSupport {
         if (wrapped != null) {
             FullScreenUtilities.removeFullScreenListenerFrom(window, wrapped);
         }
+    }
+
+    @Override
+    public LookAndFeel createLookAndFeel(String name) throws Exception {
+        return (LookAndFeel) Class.forName(name).getDeclaredConstructor().newInstance();
     }
 }
