@@ -22,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.LookAndFeel;
 import javax.swing.RootPaneContainer;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.AppForegroundListener;
@@ -296,7 +297,7 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
     }
 
     @Override
-    public LookAndFeel createLookAndFeel(String name) throws Exception {
+    public LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException {
         return UIManager.createLookAndFeel(name);
     }
 }

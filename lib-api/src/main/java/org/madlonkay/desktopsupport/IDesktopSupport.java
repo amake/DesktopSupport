@@ -6,6 +6,7 @@ import java.awt.Window;
 
 import javax.swing.JMenuBar;
 import javax.swing.LookAndFeel;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public interface IDesktopSupport {
     void addAppEventListener(SystemEventListener listener);
@@ -62,5 +63,5 @@ public interface IDesktopSupport {
 
     // Methods on UIManager
 
-    LookAndFeel createLookAndFeel(String name) throws Exception;
+    LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException;
 }

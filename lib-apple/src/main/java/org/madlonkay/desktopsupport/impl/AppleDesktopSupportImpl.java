@@ -8,9 +8,13 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.JMenuBar;
 import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.madlonkay.desktopsupport.AboutHandler;
 import org.madlonkay.desktopsupport.AppForegroundListener;
@@ -310,7 +314,24 @@ public class AppleDesktopSupportImpl implements IDesktopSupport {
     }
 
     @Override
-    public LookAndFeel createLookAndFeel(String name) throws Exception {
-        return (LookAndFeel) Class.forName(name).getDeclaredConstructor().newInstance();
+    public LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException {
+        Objects.requireNonNull(name);
+        if ("GTK look and feel".equals(name)) {
+            name = "GTK+";
+        }
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if (info.getName().equals(name)) {
+                    LookAndFeel laf = (LookAndFeel) Class.forName(info.getClassName()).getDeclaredConstructor()
+                            .newInstance();
+                    if (!laf.isSupportedLookAndFeel()) {
+                        break;
+                    }
+                    return laf;
+                }
+            }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignore) {
+        }
+        throw new UnsupportedLookAndFeelException(name);
     }
 }
