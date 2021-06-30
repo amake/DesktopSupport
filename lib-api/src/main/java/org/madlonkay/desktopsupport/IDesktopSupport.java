@@ -3,9 +3,11 @@ package org.madlonkay.desktopsupport;
 import java.awt.Image;
 import java.awt.PopupMenu;
 import java.awt.Window;
+import java.util.Objects;
 
 import javax.swing.JMenuBar;
 import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public interface IDesktopSupport {
@@ -63,5 +65,24 @@ public interface IDesktopSupport {
 
     // Methods on UIManager
 
-    LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException;
+    default LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException {
+        Objects.requireNonNull(name);
+        if ("GTK look and feel".equals(name)) {
+            name = "GTK+";
+        }
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if (info.getName().equals(name)) {
+                    LookAndFeel laf = (LookAndFeel) Class.forName(info.getClassName()).getDeclaredConstructor()
+                            .newInstance();
+                    if (!laf.isSupportedLookAndFeel()) {
+                        break;
+                    }
+                    return laf;
+                }
+            }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignore) {
+        }
+        throw new UnsupportedLookAndFeelException(name);
+    }
 }

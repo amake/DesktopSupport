@@ -164,10 +164,4 @@ public class DummyDesktopSupportImpl implements IDesktopSupport {
         // TODO Auto-generated method stub
 
     }
-
-    @Override
-    public LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

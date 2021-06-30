@@ -8,8 +8,6 @@ import java.awt.PopupMenu;
 import java.awt.Window;
 
 import javax.swing.JMenuBar;
-import javax.swing.LookAndFeel;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.junit.Test;
 
@@ -159,12 +157,6 @@ public class LibraryTest {
             public void removeFullScreenListenerFrom(Window window, FullScreenListener listener) {
                 // TODO Auto-generated method stub
 
-            }
-
-            @Override
-            public LookAndFeel createLookAndFeel(String name) throws UnsupportedLookAndFeelException {
-                // TODO Auto-generated method stub
-                return null;
             }
         };
     }
