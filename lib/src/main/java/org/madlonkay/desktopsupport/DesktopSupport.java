@@ -28,12 +28,12 @@ public final class DesktopSupport {
         try {
             return new Java9DesktopSupportImpl();
         } catch (Throwable ex) {
-            LOGGER.log(Level.FINEST, "Could not instantiate Java 9 support");
+            LOGGER.log(Level.FINEST, "Could not instantiate Java 9 support", ex);
         }
         try {
             return new AppleDesktopSupportImpl();
         } catch (Throwable ex) {
-            LOGGER.log(Level.FINEST, "Could not instantiate Apple support");
+            LOGGER.log(Level.FINEST, "Could not instantiate Apple support", ex);
         }
         return new DummyDesktopSupportImpl();
     }
