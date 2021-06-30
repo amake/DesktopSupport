@@ -48,7 +48,7 @@ public class Java9DesktopSupportImpl implements IDesktopSupport {
 
     public Java9DesktopSupportImpl() {
         // Call method only available in Java 9+ to test compatibility
-        Taskbar.getTaskbar().getIconImage();
+        Map.of();
     }
 
     private final Map<SystemEventListener, java.awt.desktop.SystemEventListener> listeners = Collections
